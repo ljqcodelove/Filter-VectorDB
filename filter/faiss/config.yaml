@@ -1,0 +1,65 @@
+random-filter-s:
+    faiss:
+      docker-tag: neurips23-filter-faiss
+      module: neurips23.filter.faiss.faiss
+      constructor: FAISS
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"indexkey": "IVF1024,SQ8"}]
+          query-args: |
+            [{"nprobe": 1},
+              {"nprobe":2},
+              {"nprobe":4}]    
+random-s:
+    faiss:
+      docker-tag: neurips23-filter-faiss
+      module: neurips23.filter.faiss.faiss
+      constructor: FAISS
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"indexkey": "IVF1024,SQ8"}]
+          query-args: |
+            [{"nprobe": 1},
+              {"nprobe":2},
+              {"nprobe":4}]
+yfcc-10M-unfiltered:
+    faiss:
+      docker-tag: neurips23-filter-faiss
+      module: neurips23.filter.faiss.faiss
+      constructor: FAISS
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"indexkey": "IVF16384,SQ8", "binarysig": true, "threads": 16}]
+          query-args: |
+            [{"nprobe": 1}, {"nprobe": 4}, {"nprobe": 16}, {"nprobe": 64}]
+yfcc-10M:
+    faiss:
+      docker-tag: neurips23-filter-faiss
+      module: neurips23.filter.faiss.faiss
+      constructor: FAISS
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"indexkey": "IVF16384,SQ8", 
+              "binarysig": true, 
+              "threads": 16
+            }]
+          query-args: |
+            [{"nprobe": 1, "mt_threshold":0.0045, "ef_construction":50, "M":25, "ef_search":10, "build_threshold":0.001},
+            {"nprobe": 1, "mt_threshold":0.01, "ef_construction":50, "M":25, "ef_search":10, "build_threshold":0.001},
+            {"nprobe": 1, "mt_threshold":0.013, "ef_construction":50, "M":25, "ef_search":10, "build_threshold":0.001},
+            {"nprobe": 1, "mt_threshold":0.012, "ef_construction":50, "M":25, "ef_search":10, "build_threshold":0.001},
+            {"nprobe": 1, "mt_threshold":0.011, "ef_construction":50, "M":25, "ef_search":10, "build_threshold":0.001},
+            {"nprobe": 1, "mt_threshold":0.015, "ef_construction":50, "M":25, "ef_search":10, "build_threshold":0.001},
+            {"nprobe": 1, "mt_threshold":0.005, "ef_construction":50, "M":25, "ef_search":10, "build_threshold":0.001},
+            {"nprobe": 1, "mt_threshold":0.007, "ef_construction":50, "M":25, "ef_search":10, "build_threshold":0.001},
+            {"nprobe": 1, "mt_threshold":0.009, "ef_construction":50, "M":25, "ef_search":10, "build_threshold":0.001},
+            {"nprobe": 1, "mt_threshold":0.02, "ef_construction":50, "M":25, "ef_search":10, "build_threshold":0.001}
+            ]
